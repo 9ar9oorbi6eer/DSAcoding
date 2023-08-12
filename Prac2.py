@@ -122,9 +122,14 @@ elif user_input == 6:
             return '1'
         else:
             return decimal_to_binary(decimal_num // 2) + str(decimal_num % 2)
-
-    decimal_num = int(input("please enter a number as base 10: "))  # Change this to the decimal number you want to convert
-    binary_num = decimal_to_binary(decimal_num)
-    print(f"The binary representation of {decimal_num} is {binary_num}")
-    # source = chatgpt openAI(https://chat.openai.com/)
+    checking_input_6 = True
+    while checking_input_6:
+        try:
+            decimal_num = int(input("please enter a number as base 10: "))  # Change this to the decimal number you want to convert
+            binary_num = decimal_to_binary(decimal_num)
+            print(f"The binary representation of {decimal_num} is {binary_num}")
+            checking_input_6 = False
+        except ValueError:
+            print("Invalid input, please try again:")
+            # source = chatgpt openAI(https://chat.openai.com/)
 
