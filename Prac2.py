@@ -114,25 +114,26 @@ elif user_input == 5:
 # source = chatgpt openAI https://chat.openai.com/
 
 # number conversions
-def convert_decimal_to_base(decimal_number, base):
-    if decimal_number == 0:
-        return ""
-    else:
-        remainder = decimal_number % base
-        return convert_decimal_to_base(decimal_number // base, base) + get_char_from_digit(remainder)
+elif user_input == 6:
+    def convert_decimal_to_base(decimal_number, base):
+        if decimal_number == 0:
+            return ""
+        else:
+            remainder = decimal_number % base
+            return convert_decimal_to_base(decimal_number // base, base) + get_char_from_digit(remainder)
 
-def get_char_from_digit(digit):
-    if digit < 10:
-        return chr(ord('0') + digit)
-    else:
-        return chr(ord('A') + digit - 10)
+    def get_char_from_digit(digit):
+        if digit < 10:
+            return chr(ord('0') + digit)
+        else:
+            return chr(ord('A') + digit - 10)
 
-decimal_number = int(input("Enter a decimal number: "))
-base = int(input("Enter a base number: "))
-result = convert_decimal_to_base(decimal_number, base)
-print(f"Decimal {decimal_number} in base {base} is: {result}")
-            # source = chatgpt openAI(https://chat.openai.com/)
-            
+    decimal_number = int(input("Enter a decimal number: "))
+    base = int(input("Enter a base number: "))
+    result = convert_decimal_to_base(decimal_number, base)
+    print(f"Decimal {decimal_number} in base {base} is: {result}")
+                # source = chatgpt openAI(https://chat.openai.com/)
+                
 
 
 
