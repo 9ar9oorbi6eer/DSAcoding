@@ -11,21 +11,28 @@ user_input = int(input("please enter the number you want:"))
 
 
 if user_input == 1:
-# factorial iterative
+    # factorial iterative
     def calcNFactorial(n): 
         nFactorial = 1
         for ii in range(n, 1, -1):
             nFactorial = nFactorial * ii
         return nFactorial
+    
     checking_input = True
     while checking_input:
         try: 
             n = int(input("please enter a number:"))
-            result = (calcNFactorial(n))
+            while n >= 1558:
+                print("the number is too large to calculate the factorial")
+                n = int(input("please enter another number: "))
+            
+            result = calcNFactorial(n)
             print("the factorial of", n, "is", result)
+            
             checking_input = False
         except ValueError:
-            print("Invalid input, please enter a valid number: ") 
+            print("Invalid input, please enter a valid number: ")
+
         # n = 1558
 
 elif user_input == 2:
@@ -39,6 +46,9 @@ elif user_input == 2:
     while checking_input2:
         try:
             n = int(input("please enter a number:"))
+            if n >= 998:
+                print("the number is too large to calculate the factorial")
+                n = int(input("please enter another number: "))
             result = calcNFactorialRecursive(n)
             print(result)
             checking_input2 = False
