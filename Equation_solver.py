@@ -9,5 +9,5 @@ postfix = equation_solver._parseInfixToPostfix(equation)
 postfix_expression = " ".join(str(token) for token in postfix.queue)
 print("Converted Postfix Expression:", postfix_expression)
 
-result = equation_solver.solves(equation)
+result = equation_solver.solve(equation)
 print("Result:", result)
