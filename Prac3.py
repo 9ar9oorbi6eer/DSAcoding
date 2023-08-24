@@ -1,4 +1,4 @@
-#بسم الله الرحمن الرحيم
+
 import numpy as np
 
 #DSA stack
@@ -39,11 +39,6 @@ class DSA_stack:
             else:
                 self.count-= 1
                 return topVal 
-            
-            
-           
-                
-            
-            
-                
+
+
 
