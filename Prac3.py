@@ -7,38 +7,40 @@ class DSA_stack:
     #constructors
         self.stack = np.array([" "] * size, dtype = object) 
         self.count = 0
+        self.size = size
         
     # getters
-        def getcount(self):
-            return self.count
-        
-        def getisEmpty(self):
-           return self.count == 0
-       
-        def getisFull(self):
-            return self.count == size
-        
-        def gettop(self):
-            if self.getisEmpty():
-                raise IndexError("the stack is empty")
-            else:
-                topVal = self.stack[self.count - 1]
+    def count(self):
+        return self.count
+    
+    def isEmpty(self):
+        return self.count == 0
+    
+    def isFull(self):
+        return self.count == self.size
+    
+    def top(self):
+        if self.isEmpty():
+            raise IndexError("the stack is empty")
+        else:
+            topVal = self.stack[self.count - 1]
+            return topVal
     
     # setters
-        def setpush(self, value):
-            if self.getisFull():
-                raise OverflowError("the stack is full ")
-            else:
-                self.stack[self.count] = value
-                self.count += 1
-                
-        def setpop(self):
-            topVal = gettop()
-            if self.getisEmpty():
-                raise IndexError("the stack is empty")
-            else:
-                self.count-= 1
-                return topVal 
+    def setpush(self, value):
+        if self.isFull():
+            raise OverflowError("the stack is full ")
+        else:
+            self.stack[self.count] = value
+            self.count += 1
+            
+    def setpop(self):
+        topVal = self.top()
+        if self.isEmpty():
+            raise IndexError("the stack is empty")
+        else:
+            self.count-= 1
+            return topVal 
 
 
 
