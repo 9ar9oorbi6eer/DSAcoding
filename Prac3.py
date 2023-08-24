@@ -43,7 +43,8 @@ def main():
     size = int(input("Enter the size of the stack: "))
     stack = DSA_stack(size)
     
-    while True:
+    running = True
+    while running:
         print("\nStack Menu:")
         print("1. Push")
         print("2. Pop")
@@ -73,7 +74,7 @@ def main():
             print("Stack size:", stack.size)
         elif choice == "5":
             print("Exiting the program.")
-            break
+            running = False
         else:
             print("Invalid choice. Please enter a valid option.")
 

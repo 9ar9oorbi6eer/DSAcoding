@@ -26,3 +26,31 @@ class CircularDSA_queue(DSA_queue):
         else:
             print("Queue is empty. Cannot dequeue.")
             return None
+def main():
+    size = int(input("Enter the size of the circular queue: "))
+    circular_queue = CircularDSA_queue(size)
+    
+    running = True
+    while running:
+        print("\nMenu:")
+        print("1. Enqueue")
+        print("2. Dequeue")
+        print("3. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            value = input("Enter the value to enqueue: ")
+            circular_queue.enqueue(value)
+        elif choice == "2":
+            dequeued_value = circular_queue.dequeue()
+            if dequeued_value is not None:
+                print("Dequeued value:", dequeued_value)
+        elif choice == "3":
+            print("Exiting the program.")
+            running = False
+        else:
+            print("Invalid choice. Please select a valid option.")
+
+if __name__ == "__main__":
+    main()

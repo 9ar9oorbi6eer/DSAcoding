@@ -34,3 +34,45 @@ class DSA_queue:
             self.queue[-1] = " "
             self.count -= 1
             return front_value
+def main():
+    size = int(input("Enter the size of the queue: "))
+    queue = DSA_queue(size)
+    running = True  # Initialize a boolean flag to control the loop
+    
+    while running:  # Use the boolean flag as the loop condition
+        print("\nMenu:")
+        print("1. Enqueue")
+        print("2. Dequeue")
+        print("3. Peek")
+        print("4. Get Count")
+        print("5. Exit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            value = input("Enter the value to enqueue: ")
+            queue.enqueue(value)
+            print("Enqueued:", value)
+        elif choice == "2":
+            if not queue.isEmpty():
+                dequeued_value = queue.dequeue()
+                print("Dequeued:", dequeued_value)
+            else:
+                print("Queue is empty.")
+        elif choice == "3":
+            if not queue.isEmpty():
+                front_value = queue.peek()
+                print("Front value:", front_value)
+            else:
+                print("Queue is empty.")
+        elif choice == "4":
+            count = queue.getCount()
+            print("Queue count:", count)
+        elif choice == "5":
+            print("Exiting the test harness.")
+            running = False  # Set the flag to False to exit the loop
+        else:
+            print("Invalid choice. Please choose a valid option.")
+
+if __name__ == "__main__":
+    main()
