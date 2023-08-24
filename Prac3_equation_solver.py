@@ -31,27 +31,27 @@ class EquationSolver(DSA_stack, CircularDSA_queue, DSA_queue):
         def isOperator(token):
             return token in operators
 
-        # terms = equation.split()
-        for term in range(len(equation)):
-            if equation[term] == " ":
-                continue
-            elif equation[term] == '(':
+        tokens = equation.split()  # Split the equation into tokens
+
+        for term in tokens:
+            if term == '(':
                 opStack.setpush('(')
-            elif equation[term] == ')':
+            elif term == ')':
                 while opStack.top() != '(':
                     postfix.enqueue(opStack.setpop())
-                opStack.setpop()  # Discard '('
-            elif isOperator(equation[term]):
-                while not opStack.isEmpty() and opStack.top() != '(' and precedenceOf(opStack.top()) >= precedenceOf(equation[term]):
+                opStack.setpop()
+            elif isOperator(term):
+                while not opStack.isEmpty() and opStack.top() != '(' and precedenceOf(opStack.top()) >= precedenceOf(term):
                     postfix.enqueue(opStack.setpop())
-                opStack.setpush(equation[term])
+                opStack.setpush(term)
             else:
-                postfix.enqueue(float(equation[term]))
+                postfix.enqueue(float(term))  # Convert valid numbers to float
 
         while not opStack.isEmpty():
             postfix.enqueue(opStack.setpop())
 
         return postfix
+
 
     def _evaluatePostfix(self, postfix):
         operandStack = DSA_stack()

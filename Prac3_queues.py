@@ -37,9 +37,9 @@ class DSA_queue:
 def main():
     size = int(input("Enter the size of the queue: "))
     queue = DSA_queue(size)
-    running = True  # Initialize a boolean flag to control the loop
+    running = True  
     
-    while running:  # Use the boolean flag as the loop condition
+    while running:  
         print("\nMenu:")
         print("1. Enqueue")
         print("2. Dequeue")
@@ -70,7 +70,7 @@ def main():
             print("Queue count:", count)
         elif choice == "5":
             print("Exiting the test harness.")
-            running = False  # Set the flag to False to exit the loop
+            running = False  
         else:
             print("Invalid choice. Please choose a valid option.")
 

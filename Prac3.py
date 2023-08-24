@@ -38,7 +38,7 @@ class DSA_stack:
             self.count -= 1
             return topVal
 
-# Menu for interacting with the stack
+# Menu 
 def main():
     size = int(input("Enter the size of the stack: "))
     stack = DSA_stack(size)

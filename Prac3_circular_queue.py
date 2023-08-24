@@ -29,16 +29,16 @@ class CircularDSA_queue(DSA_queue):
 def main():
     size = int(input("Enter the size of the circular queue: "))
     circular_queue = CircularDSA_queue(size)
-    
+
     running = True
     while running:
         print("\nMenu:")
         print("1. Enqueue")
         print("2. Dequeue")
         print("3. Exit")
-        
+
         choice = input("Enter your choice: ")
-        
+
         if choice == "1":
             value = input("Enter the value to enqueue: ")
             circular_queue.enqueue(value)
