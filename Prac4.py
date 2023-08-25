@@ -47,6 +47,10 @@ class DSALinkedList:
     def peekFirst(self):
         if self.isEmpty():
             raise Exception("Cannot peak")
+        return
+    
+    def peekLast(self):
+        return
     
        
 
