@@ -1,11 +1,13 @@
-import numpy as np
-
+from LinkedLists import *
 # DSA stack
 class DSA_stack:
     def __init__(self, size=100):
-        self.stack = np.array([" "] * size, dtype=object)
-        self.count = 0
-        self.size = size
+        if size < 1:
+            raise ValueError("size must be greater than 1")
+        else:
+            self.stack = DSALinkedList()
+            self.count = 0
+            self.size = size
 
     def count(self):
         return self.count
