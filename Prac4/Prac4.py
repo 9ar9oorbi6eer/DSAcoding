@@ -1,4 +1,3 @@
-# acitivity number 1:
 class DSAListNode:
     # class fields:
     def __init__(self, inValue, nextNode = None):
@@ -61,40 +60,34 @@ class DSALinkedList:
         if DSALinkedList.isEmpty():
             raise ValueError("list is empty")
         else:
-            self.head = self.head.getNext()
-            self.tail = None
+            newHead = self.head.getNext()
+            newHead.setPrev(None)
+            self.head = newHead
         return self.head.getValue()
     
-        
     def removeLast(self):
         if DSALinkedList.isEmpty():
             raise ValueError("list is empty")
-        elif self.head.getNext != None:
-            nodeValue = self.head.getValue()
-            self.head = None
         else:
-            prevNd = None
-            currNd = self.head
-            while currNd.getNext() != None:
-                prevNd = currNd
-                currNd = currNd.getNext()
-            prevNd.setNext(None)
-            nodeValue = currNd.getValue()
-        
+            self.tail = self.tail.getPrev()
+            self.tail.setNext(None)
+            if self.tail == None:
+                self.head == None
+                
     def peekFirst(self):
         if self.isEmpty():
             raise ValueError("Cannot peak")
         else:
             return self.head.getValue()
+
     
     def peekLast(self):
         if DSALinkedList.isEmpty():
             raise ValueError("List is empty")
         else:
-            currNd = self.head
-            while currNd.getNext() != None:
-                currNd = currNd.getNext()
-            return currNd.getValue()
+            return self.tail.getValue()
+        
+
         
         
 
