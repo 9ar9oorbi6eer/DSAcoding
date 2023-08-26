@@ -1,9 +1,10 @@
 # acitivity number 1:
 class DSAListNode:
     # class fields:
-    def __init__(self, inValue):
+    def __init__(self, inValue, nextNode = None):
         self.value = inValue
-        self.next = None
+        self.nextNode = nextNode
+        self.prevNode = None
         
     # getters and setters
     def getValue(self):
@@ -13,46 +14,87 @@ class DSAListNode:
         self.value = inValue
     
     def getNext(self):
-        return self.next
+        return self.nextNode
 
     def setNext(self, newNext: "DSAListNode"):
         self.next = newNext
-
+        
+    def getPrev(self):
+        return self.prevNode
+    
+    def setPrev(self, newPrevNode):
+        self.prevNode = newPrevNode
+        
+        
 class DSALinkedList:
     #class fields:
     def __init__(self):
-        self.head = None
+        self.head = None    
+        self.tail = None
         
+    def isEmpty(self):
+        return self.head == None
+    
     # getters and setters
     def insertFirst(self, newValue):
-        newNd = DSALinkedList(newValue)
-    if isEmpty():
-        head = newNd
-    else:
-        newNd.setNext(head)
-        head = newNd
-    
+        newNd = DSAListNode(newValue)
+        if DSALinkedList.isEmpty():
+            self.head = newNd
+        else:
+            newNd.setNext(self.head)
+            self.head = newNd
+        self.tail = newNd
+            
     def insertLast(self, newValue):
-        newNd = DSALinkedList(newValue)
-    if isEmpty():
-        head = headNd
-    else:
-        currNd = head
-    while currNd.getNext():
-        currNd = currNd.getNext()
+        newNd = DSAListNode(newValue)
     
-    def isEmpty(self):
-        return self.head is None
-    
+        if DSALinkedList.isEmpty():
+            self.head = newNd
+        else:
+            currNd = self.head
+            while currNd.getNext():
+                currNd = currNd.getNext()
+            currNd.setNext(newNd)
+            
+    def removeFirst(self):
+        if DSALinkedList.isEmpty():
+            raise ValueError("list is empty")
+        else:
+            self.head = self.head.getNext()
+        return self.head.getValue()
+        
+    def removeLast(self):
+        if DSALinkedList.isEmpty():
+            raise ValueError("list is empty")
+        elif self.head.getNext != None:
+            nodeValue = self.head.getValue()
+            self.head = None
+        else:
+            prevNd = None
+            currNd = self.head
+            while currNd.getNext() != None:
+                prevNd = currNd
+                currNd = currNd.getNext()
+            prevNd.setNext(None)
+            nodeValue = currNd.getValue()
+        
     def peekFirst(self):
         if self.isEmpty():
-            raise Exception("Cannot peak")
-        return
+            raise ValueError("Cannot peak")
+        else:
+            return self.head.getValue()
     
     def peekLast(self):
-        return
-    
-       
+        if DSALinkedList.isEmpty():
+            raise ValueError("List is empty")
+        else:
+            currNd = self.head
+            while currNd.getNext() != None:
+                currNd = currNd.getNext()
+            return currNd.getValue()
+        
+        
+
 
     
     
