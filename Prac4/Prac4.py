@@ -55,13 +55,16 @@ class DSALinkedList:
             while currNd.getNext():
                 currNd = currNd.getNext()
             currNd.setNext(newNd)
+        self.tail = newNd
             
     def removeFirst(self):
         if DSALinkedList.isEmpty():
             raise ValueError("list is empty")
         else:
             self.head = self.head.getNext()
+            self.tail = None
         return self.head.getValue()
+    
         
     def removeLast(self):
         if DSALinkedList.isEmpty():
