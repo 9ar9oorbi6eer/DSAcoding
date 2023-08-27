@@ -1,21 +1,11 @@
 from LinkedLists import *
 # DSA stack
 class DSA_stack:
-    def __init__(self, size=100):
-        if size < 1:
-            raise ValueError("Size must be greater than 1")
-        else:
-            self.stack = DSALinkedList()
-            self.size = size
-
-    def count(self):
-        return self.stack.getCount()
+    def __init__(self):
+        self.stack = DSALinkedList()
 
     def isEmpty(self):
         return self.stack.isEmpty()
-
-    def isFull(self):
-        return self.stack.getCount() == self.size
 
     def top(self):
         if self.isEmpty():
@@ -24,10 +14,7 @@ class DSA_stack:
             return self.stack.peekFirst()
 
     def push(self, value):
-        if self.isFull():
-            raise OverflowError("The stack is full")
-        else:
-            self.stack.insertFirst(value)
+        self.stack.insertFirst(value)
 
     def pop(self):
         if self.isEmpty():
