@@ -1,39 +1,28 @@
 import numpy as np
+from LinkedLists import DSALinkedList
 
 # DSA queue
 class DSA_queue:
     def __init__(self, size=100):
-        # constructors
-        self.queue = np.array([" "] * size, dtype=object)
-        self.count = 0
+        self.queue = DSALinkedList()  # Use DSALinkedList as the underlying data structure
     
-    # getters
     def getCount(self):  
-        return self.count
+        return self.queue.getCount()
     
     def isEmpty(self):
-        return self.count == 0
-    
-    def isFull(self, size):  
-        return self.count == size
+        return self.queue.isEmpty()
     
     def peek(self):
         if not self.isEmpty():
-            return self.queue[0]
+            return self.queue.peekFirst()  # Use peekFirst from DSALinkedList
     
-    # setters
     def enqueue(self, value):
-        if not self.isFull(len(self.queue)):
-            self.queue[self.count] = value
-            self.count += 1
+        self.queue.insertLast(value)  # Use insertLast from DSALinkedList
     
     def dequeue(self):
         if not self.isEmpty():
-            front_value = self.queue[0]
-            self.queue[:-1] = self.queue[1:]
-            self.queue[-1] = " "
-            self.count -= 1
-            return front_value
+            return self.queue.removeFirst()  # Use removeFirst from DSALinkedList
+
 def main():
     size = int(input("Enter the size of the queue: "))
     queue = DSA_queue(size)

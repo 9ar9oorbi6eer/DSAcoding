@@ -3,42 +3,37 @@ from LinkedLists import *
 class DSA_stack:
     def __init__(self, size=100):
         if size < 1:
-            raise ValueError("size must be greater than 1")
+            raise ValueError("Size must be greater than 1")
         else:
             self.stack = DSALinkedList()
-            self.count = 0
             self.size = size
 
     def count(self):
-        return self.count
+        return self.stack.getCount()
 
     def isEmpty(self):
-        return self.count == 0
+        return self.stack.isEmpty()
 
     def isFull(self):
-        return self.count == self.size
+        return self.stack.getCount() == self.size
 
     def top(self):
         if self.isEmpty():
-            raise IndexError("the stack is empty")
+            raise IndexError("The stack is empty")
         else:
-            topVal = self.stack[self.count - 1]
-            return topVal
+            return self.stack.peekFirst()
 
-    def setpush(self, value):
+    def push(self, value):
         if self.isFull():
-            raise OverflowError("the stack is full ")
+            raise OverflowError("The stack is full")
         else:
-            self.stack[self.count] = value
-            self.count += 1
+            self.stack.insertFirst(value)
 
-    def setpop(self):
-        topVal = self.top()
+    def pop(self):
         if self.isEmpty():
-            raise IndexError("the stack is empty")
+            raise IndexError("The stack is empty")
         else:
-            self.count -= 1
-            return topVal
+            return self.stack.removeFirst()
 
 # Menu 
 def main():
