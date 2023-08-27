@@ -16,7 +16,7 @@ class DSAListNode:
         return self.nextNode
 
     def setNext(self, newNext: "DSAListNode"):
-        self.next = newNext
+        self.nextNode = newNext
         
     def getPrev(self):
         return self.prevNode
@@ -47,7 +47,7 @@ class DSALinkedList:
     def insertLast(self, newValue):
         newNd = DSAListNode(newValue)
     
-        if DSALinkedList.isEmpty():
+        if self.isEmpty():
             self.head = newNd
         else:
             currNd = self.head
@@ -57,7 +57,7 @@ class DSALinkedList:
         self.tail = newNd
             
     def removeFirst(self):
-        if DSALinkedList.isEmpty():
+        if self.isEmpty():
             raise ValueError("list is empty")
         else:
             newHead = self.head.getNext()
@@ -66,7 +66,7 @@ class DSALinkedList:
         return self.head.getValue()
     
     def removeLast(self):
-        if DSALinkedList.isEmpty():
+        if self.isEmpty():
             raise ValueError("list is empty")
         else:
             self.tail = self.tail.getPrev()
@@ -82,7 +82,7 @@ class DSALinkedList:
 
     
     def peekLast(self):
-        if DSALinkedList.isEmpty():
+        if self.isEmpty():
             raise ValueError("List is empty")
         else:
             return self.tail.getValue()
