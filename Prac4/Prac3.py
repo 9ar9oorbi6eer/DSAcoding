@@ -1,26 +1,45 @@
 from LinkedLists import *
 # DSA stack
 class DSA_stack:
-    def __init__(self):
-        self.stack = DSALinkedList()
+    def __init__(self, size = 100):
+        if size < 1:
+            raise ValueError("size must be greater than 1")
+        else:
+            self.stack = DSALinkedList()
+            self.size = size
+            self.count = 0
+    
+    def count(self):
+        return self.count
+        
 
     def isEmpty(self):
-        return self.stack.isEmpty()
+        return self.count == 0
+    
+    def isFull(self):
+        return self.count == self.size
+    
 
     def top(self):
         if self.isEmpty():
             raise IndexError("The stack is empty")
         else:
-            return self.stack.peekFirst()
+            return self.stack.peekLast()
 
     def push(self, value):
-        self.stack.insertFirst(value)
+        if self.isFull():
+            raise OverflowError("its full")
+        else:
+            self.stack.insertFirst(value)
+            self.count += 1
+        
 
     def pop(self):
         if self.isEmpty():
             raise IndexError("The stack is empty")
         else:
-            return self.stack.removeFirst()
+            self.count -= 1
+            return self.stack.removeLast()
 
 # Menu 
 def main():
@@ -39,12 +58,15 @@ def main():
         choice = input("Enter your choice: ")
         
         if choice == "1":
-            value = input("Enter the value to push: ")
-            stack.setpush(value)
-            print("Value pushed.")
+            try:
+                value = input("Enter the value to push: ")
+                stack.push(value)
+                print("Value pushed.")
+            except OverflowError as e:
+                print(e)
         elif choice == "2":
             try:
-                popped_value = stack.setpop()
+                popped_value = stack.pop()
                 print("Popped value:", popped_value)
             except IndexError as e:
                 print(e)

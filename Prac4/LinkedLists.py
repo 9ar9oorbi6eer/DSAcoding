@@ -39,42 +39,51 @@ class DSALinkedList:
         newNd = DSAListNode(newValue)
         if self.isEmpty():
             self.head = newNd
+            self.tail = newNd
         else:
             newNd.setNext(self.head)
+            self.head.setPrev(newNd)
             self.head = newNd
-        self.tail = newNd
+        
             
     def insertLast(self, newValue):
         newNd = DSAListNode(newValue)
-    
         if self.isEmpty():
             self.head = newNd
+            self.tail = newNd
         else:
-            currNd = self.head
-            while currNd.getNext():
-                currNd = currNd.getNext()
-            currNd.setNext(newNd)
+            self.tail.setNext(newNd)
+            newNd.setPrev(self.tail)  
         self.tail = newNd
+
             
     def removeFirst(self):
         if self.isEmpty():
             raise ValueError("list is empty")
         else:
-            newHead = self.head.getNext()
-            newHead.setPrev(None)
-            self.head = newHead
-        return self.head.getValue()
-    
+            if self.head.getNext() is None:
+                self.head = None
+                self.tail = None
+            else:
+                self.head = self.head.getNext()
+                self.head.setPrev(None)
+           
     def removeLast(self):
         if self.isEmpty():
             raise ValueError("List is empty")
-        elif self.head == self.tail:  
+        elif self.head.getNext() is None:
+            nodeValue = self.tail.getValue()  
             self.head = None
             self.tail = None
         else:
+            nodeValue = self.tail.getValue()
             self.tail = self.tail.getPrev()
-            if self.tail:
-                self.tail.setNext(None)
+            self.tail.setNext(None)
+        return nodeValue
+            # if prevTail:
+            #     prevTail.setNext(None)
+            # self.tail = prevTail
+
                 
     def peekFirst(self):
         if self.isEmpty():
@@ -101,16 +110,20 @@ class TestHarness:
         print("None")
 
     def run(self):
-        while True:
+        loop = True
+        while loop == True:
             print("\nOptions:")
             print("1. Insert First")
             print("2. Insert Last")
             print("3. Remove First")
             print("4. Remove Last")
             print("5. Display List")
-            print("6. Quit")
+            print("6. Peek First")
+            print("7. Peek Last")
+            print("8. Quit")
 
             choice = input("Enter your choice: ")
+    
 
             if choice == '1':
                 value = input("Enter value to insert: ")
@@ -131,8 +144,12 @@ class TestHarness:
             elif choice == '5':
                 self.display_list()
             elif choice == '6':
+                print(self.linkedList.peekFirst())
+            elif choice == '7':
+                print(self.linkedList.peekLast())
+            elif choice == '8':
                 print("Goodbye!")
-                break
+                loop = False
             else:
                 print("Invalid choice. Please select a valid option.")
 
