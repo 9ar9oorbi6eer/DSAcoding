@@ -44,36 +44,51 @@ class DSABinarySearchTree:
     
     def heightRec(self, curNode):
         if curNode == None:
-            htSoFar = -1
-        else:
-            leftHt = self.heightRec(curNode.leftChild)
-            rightHt = self.heightRec(curNode.rightChild)
+            return -1  
+        leftHt = self.heightRec(curNode.leftChild)
+        rightHt = self.heightRec(curNode.rightChild)
         
         if leftHt > rightHt:
-            htSoFar = leftHt + 1
-        
+            return leftHt + 1
         else:
-            htSoFar = rightHt + 1
-        
-        return htSoFar
+            return rightHt + 1
     
     def minRec(self, curNode):
-        if (curNode.left !=None):
-            minKey = self.minRec(curNode.LeftChild)
+        if (curNode.leftChild !=None):
+            minKey = self.minRec(curNode.leftChild)
         else:
             minKey = curNode.key
         return minKey
     
-    def balance(self):
-        return self.balance_rec(self.root)
+    def maxRec(self, curNode):
+        if (curNode.rightChild !=None):
+            maxKey = self.maxRec(curNode.rightChild)
+        else:
+            maxKey = curNode.key
+        return maxKey
     
-    def balanceRec(self, curNode):
+    def balance(self):
+        total_nodes = self.total_nodes(self.root)
+        balanced_nodes = self.count_balanced_nodes(self.root)
+        if total_nodes == 0:
+            return 0  # or maybe 100%, depends on how you want to define it
+        return (balanced_nodes / total_nodes) * 100
+
+    def count_balanced_nodes(self, curNode):
         if curNode is None:
-            return True
+            return 0
+
         leftHeight = self.heightRec(curNode.leftChild)
         rightHeight = self.heightRec(curNode.rightChild)
-        balancing = abs(leftHeight - rightHeight)
-        return balancing <= 1 and self.balanceRec(curNode.leftChild) and self.balanceRec(curNode.rightChild)
+
+        is_balanced = abs(leftHeight - rightHeight) <= 1
+
+        leftCount = self.count_balanced_nodes(curNode.leftChild)
+        rightCount = self.count_balanced_nodes(curNode.rightChild)
+
+        return (1 if is_balanced else 0) + leftCount + rightCount
+
+
 
     def delete(self, key):
         self.root = self.delete_rec(key, self.root)
@@ -139,6 +154,12 @@ class DSABinarySearchTree:
             self.postorder_traversal_rec(cur_node.leftChild)
             self.postorder_traversal_rec(cur_node.rightChild)
             print("Key", cur_node.key, "value", cur_node.value)
+            
+    def total_nodes(self, curNode):
+        if curNode is None:
+            return 0
+        return 1 + self.total_nodes(curNode.leftChild) + self.total_nodes(curNode.rightChild)
+
 
 def interactive_menu():
     bst = DSABinarySearchTree()
@@ -147,9 +168,14 @@ def interactive_menu():
         print("1: Add node")
         print("2: Delete node")
         print("3: Display tree")
-        print("4: Prefill Tree")
-        print("5: Exit")
-        choice = input("Enter your choice: ")
+        print("4: Check if tree is balanced")
+        print("5: Find minimum key")
+        print("6: Find maximum key")
+        print("7: Find height of the tree")
+        print("8: Exit")
+
+        choice = input("Enter your choice: ")  # Move this line inside the loop
+
         if choice == '1':
             key = int(input("Enter key: "))
             value = input("Enter value: ")
@@ -165,8 +191,30 @@ def interactive_menu():
                 bst.preorder_traversal()
             elif traversal_choice == 'postorder':
                 bst.postorder_traversal()
-        elif choice == "4":
+        elif choice == '4':
+            balance_percentage = bst.balance()
+            print(f"the tree is {balance_percentage}% balanced")
+        elif choice == "5":
+            try:
+                minKey = bst.minRec(bst.root)
+                print(f"the minimum key is {minKey}")
+            except AttributeError:
+                print("tree is empty")
+        elif choice == "6":
+            try:
+                maxKey = bst.maxRec(bst.root)
+                print(f"the maximum key is {maxKey}")
+            except AttributeError:
+                print("tree is empty")
+        elif choice == "7":
+            try:
+                height = bst.height()
+                print(f"the height of the tree is {height}")
+            except AttributeError:
+                print("tree is empty")
+        elif choice == "8":
             loop = False
+
 
     
     
