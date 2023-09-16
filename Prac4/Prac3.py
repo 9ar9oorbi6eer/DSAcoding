@@ -1,4 +1,4 @@
-from LinkedLists import *
+from Prac6.LinkedLists import *
 # DSA stack
 class DSA_stack:
     def __init__(self, size = 100):

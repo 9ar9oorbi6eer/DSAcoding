@@ -1,5 +1,5 @@
 import numpy as np
-from LinkedLists import DSALinkedList
+from Prac6.LinkedLists import DSALinkedList
 
 # DSA queue
 class DSA_queue:
