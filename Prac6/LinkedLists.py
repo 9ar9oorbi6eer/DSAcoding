@@ -44,6 +44,22 @@ class DSALinkedList:
             newNd.setNext(self.head)
             self.head.setPrev(newNd)
             self.head = newNd
+        #new added
+    def getCount(self):
+        count = 0
+        current = self.head
+        while current:
+            count += 1
+            current = current.getNext()
+        return count
+    # new added
+    def toList(self):
+        lst = []
+        current = self.head
+        while current:
+            lst.append(current.getValue())
+            current = current.getNext()
+        return lst
         
             
     def insertLast(self, newValue):

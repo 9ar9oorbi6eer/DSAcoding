@@ -1,5 +1,5 @@
 from Prac3_queues import DSA_queue
-from Prac3 import DSA_stack
+from Prac6.stack import DSA_stack
 from Prac3_circular_queue import CircularDSA_queue
 
 class EquationSolver(DSA_stack, CircularDSA_queue, DSA_queue):
