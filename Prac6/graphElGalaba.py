@@ -3,12 +3,6 @@ from stack import DSA_stack
 from queue import DSA_queue
 import numpy as np
 
-
-from LinkedLists import DSAListNode, DSALinkedList  # Assuming you have these classes
-from stack import DSA_stack  # Assuming you have a stack class named DSA_stack
-from queue import DSA_queue  # Assuming you have a queue class named DSA_queue
-import numpy as np
-
 # Vertex Class
 class Vertex:
     def __init__(self, label, value=None):
@@ -24,10 +18,7 @@ class Vertex:
         return self.value
 
     def getAdjacent(self):
-        return self.adjacent.toList()  # Assuming toList method in DSALinkedList
-
-    def addEdge(self, vertex):
-        self.adjacent.insertLast(vertex)
+        return self.adjacent.toList()  
 
     def setVisited(self):
         self.visited = True
@@ -46,39 +37,47 @@ class DSA_graph:
     def addVertex(self, label, value=None):
         new_vertex = Vertex(label, value)
         self.vertices.insertLast(new_vertex)
+    
+    def addEdge(self, label1, label2):
+        vertex1 = self.findVertex(label1)
+        vertex2 = self.findVertex(label2)
+        
+        if vertex1 and vertex2:
+            vertex1.adjacent.insertLast(vertex2)
+            
 
     def findVertex(self, label):
         curr = self.vertices.head
         while curr:
-            if curr.value.getLabel() == label:
-                return curr.value
-            curr = curr.next
+            if curr.getValue().getLabel() == label:
+                return curr.getValue()
+            curr = curr.getNext()
         return None
 
     def clearAllVisited(self):
         current = self.vertices.head
         while current:
-            current.value.clearVisited()
-            current = current.next
-
+            current.visited = False
+            current = current.getNext()
+            
     def BFS(self):
         T = DSA_queue()
         Q = DSA_queue()
 
         self.clearAllVisited()
 
-        v = self.vertices.head.value
-        v.setVisited(True)
-        Q.enqueue(v)
+        start_vertex = self.vertices.head.getValue()
+        start_vertex.setVisited()
+        Q.enqueue(start_vertex)
 
         while not Q.isEmpty():
-            v = Q.dequeue()
-            for w in v.getAdjacent():
-                if not w.getVisited():
-                    T.enqueue(v)
-                    T.enqueue(w)
-                    w.setVisited(True)
-                    Q.enqueue(w)
+            current_vertex = Q.dequeue()
+            print(current_vertex.getLabel())  # Output the label of the visited vertex
+
+            for neighbor in current_vertex.getAdjacent():
+                if not neighbor.getVisited():
+                    neighbor.setVisited()
+                    Q.enqueue(neighbor)
 
     def DFS(self):
         T = DSA_queue()
@@ -86,23 +85,63 @@ class DSA_graph:
 
         self.clearAllVisited()
 
-        v = self.vertices.head.value
-        v.setVisited(True)
-        S.push(v)
+        start_vertex = self.vertices.head.getValue()
+        start_vertex.setVisited()
+        S.setpush(start_vertex)
 
         while not S.isEmpty():
-            v = S.peek()
-            unvisited_found = False
-            for w in v.getAdjacent():
-                if not w.getVisited():
-                    T.enqueue(v)
-                    T.enqueue(w)
-                    w.setVisited(True)
-                    S.push(w)
-                    unvisited_found = True
-                    break
-            if not unvisited_found:
-                S.pop()
+            current_vertex = S.setpop()
+            print(current_vertex.getLabel())  # Output the label of the visited vertex
+
+            for neighbor in current_vertex.getAdjacent():
+                if not neighbor.getVisited():
+                    neighbor.setVisited()
+                    S.setpush(neighbor)
+
+
+    # def BFS(self):
+    #     T = DSA_queue()
+    #     Q = DSA_queue()
+
+    #     self.clearAllVisited()
+
+    #     v = self.vertices.head.value
+    #     v.setVisited()
+    #     T.enqueue(v)
+
+    #     while not Q.isEmpty():
+    #         print(Q.dequeue().getLabel())
+    #         v = T.dequeue()
+    #         for w in v.getAdjacent():
+    #             if not w.getVisited():
+    #                 T.enqueue(v)
+    #                 T.enqueue(w)
+    #                 w.setVisited(True)
+    #                 Q.enqueue(w)
+
+    # def DFS(self):
+    #     T = DSA_queue()
+    #     S = DSA_stack()
+
+    #     self.clearAllVisited()
+
+    #     v = self.vertices.head.value
+    #     v.setVisited()
+    #     S.setpush(v)
+
+    #     while not S.isEmpty():
+    #         v = S.top()
+    #         unvisited_found = False
+    #         for w in v.getAdjacent():
+    #             if not w.getVisited():
+    #                 T.enqueue(v)
+    #                 T.enqueue(w)
+    #                 w.setVisited()
+    #                 S.setpush(w)
+    #                 unvisited_found = True
+    #                 break
+    #         if not unvisited_found:
+    #             S.setpop()
 
 
 def main():
@@ -129,7 +168,7 @@ def main():
             vertex1 = graph.findVertex(label1)
             vertex2 = graph.findVertex(label2)
             if vertex1 and vertex2:
-                vertex1.addEdge(vertex2)
+                graph.addEdge(vertex1, vertex2)
                 print(f"Edge added between {label1} and {label2}.")
             else:
                 print("One or both vertices not found.")
@@ -151,5 +190,31 @@ def main():
         else:
             print("Invalid choice. Please enter a number between 1 and 5.")
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+
+# Creating a graph and adding vertices A to G
+graph = DSA_graph()
+graph.addVertex("A")
+graph.addVertex("B")
+graph.addVertex("C")
+graph.addVertex("D")
+graph.addVertex("E")
+graph.addVertex("F")
+graph.addVertex("G")
+graph.addEdge("A", "B")
+graph.addEdge("A", "C")
+graph.addEdge("A", "D")
+graph.addEdge("B", "E")
+graph.addEdge("C", "D")
+graph.addEdge("D", "F")
+graph.addEdge("E", "F")
+graph.addEdge("E", "G")
+graph.addEdge("F", "G")
+
+# Running DFS and BFS
+print("Running Depth-First Search:")
+graph.DFS()
+
+print("\nRunning Breadth-First Search:")
+graph.BFS()

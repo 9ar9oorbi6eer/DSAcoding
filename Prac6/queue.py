@@ -21,7 +21,8 @@ class DSA_queue:
     
     def dequeue(self):
         if not self.isEmpty():
-            return self.queue.removeFirst()  # Use removeFirst from DSALinkedList
+            topVal=self.queue.removeFirst()  # Use removeFirst from DSALinkedList
+            return topVal
 
 def main():
     size = int(input("Enter the size of the queue: "))
