@@ -1,5 +1,5 @@
 import unittest
-from hashTablesFinal import MyHashTable
+from Prac7.hashTables_rough import MyHashTable
 
 class TestMyHashTable(unittest.TestCase):
     
